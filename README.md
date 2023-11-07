@@ -1,6 +1,6 @@
 # React + TypeScript + Vite + Redux + Rest full Api + Tailwind
 
-A social networking website where a user can log in and view, like and comment on posts. Create a post and have a profile page. Using real api (rest API)
+A social networking website where a user can log in and view, like and comment on posts. Create a post and have a profile page. Using real api (rest API) with dark mode
 
 https://social.bahamin.online
 
