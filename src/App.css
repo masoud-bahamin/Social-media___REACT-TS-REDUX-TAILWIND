@@ -1,0 +1,6 @@
+.light li a.active{
+    background-color: #ebe6e6;
+}
+.dark li a.active{
+    background-color: rgba(94, 94, 94, 0.516);
+}
