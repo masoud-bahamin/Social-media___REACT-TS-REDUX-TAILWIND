@@ -1,6 +1,7 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + Redux + Rest full Api + Tailwind
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+https://social.bahamin.online/login
 
 Currently, two official plugins are available:
 
