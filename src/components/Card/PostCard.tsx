@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { DispatchType, StateType } from '../../redux/store'
 import { updatePost } from '../../redux/store/posts'
 import CommentModal from '../Modal/CommentModal'
-import { updateUserInfo } from '../../redux/store/users'
+
 
 export default function PostCard(props: PostType) {
 
@@ -11,7 +11,7 @@ export default function PostCard(props: PostType) {
     const [comment, setComment] = React.useState("")
     const [like, setLike] = React.useState(false)
 
-    const { title, image, avatar, likes, comments, username, id, description } = props
+    const { title, image, avatar, likes, comments, username} = props
 
     const dispatch: DispatchType = useDispatch()
 

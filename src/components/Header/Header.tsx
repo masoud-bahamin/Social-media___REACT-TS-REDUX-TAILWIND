@@ -16,16 +16,17 @@ export default function Header() {
         dispatch(changeTheme(status === "dark" ? "light" : "dark"))
     }
 
-    const { userInfo, loading } = useSelector((state: StateType) => state.Users)
+    const { userInfo} = useSelector((state: StateType) => state.Users)
 
     const { status } = useSelector((state: StateType) => state.Theme)
 
     return (
         <header className="bg-white dark:text-gray-300 dark:bg-gray-700 fixed top-0 left-0 w-full z-50 p-3">
             <div className='flex justify-between'>
-                <div className='flex'>
+                <div className='flex items-center'>
                     <div>
-                        <img className="rounded-full w-10 h-10 mr-2" src="https://bahamin.online/img/lo1.png" alt="" />
+                        <img className="rounded-full w-20 mr-2 light-hidden" src="/logo2d.png" alt="" />
+                        <img className="rounded-full w-20 mr-2 dark-hidden" src="/logo2.png" alt="" />
                     </div>
                     <div className='p-3 mx-2 group hover:bg-blue-400 rounded-xl '>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor"

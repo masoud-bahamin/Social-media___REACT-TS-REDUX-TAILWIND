@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 interface CommentModalProps {
     children: React.ReactNode,
@@ -11,7 +11,7 @@ export default function CommentModal({ children, title , isShow , setIsShow}: Co
 
     return (
         <div className={`${isShow ? "block" : "hidden"}`}>
-            <div onClick={(e) => setIsShow(false)}
+            <div onClick={() => setIsShow(false)}
                 className={` bg-[rgba(100,100,100,.7)] fixed top-0 left-0 right-0 z-10 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%)] max-h-full`}
             ></div>
                 <div className="relative w-full max-w-2xl max-h-full mx-auto z-20">

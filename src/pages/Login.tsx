@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  loginUser } from '../redux/store/users'
+import { loginUser } from '../redux/store/users'
 import { DispatchType } from '../redux/store'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,15 +18,15 @@ export default function Login() {
         e.preventDefault()
         console.log(data);
         dispatch(loginUser(email))
-        if (!loading && userInfo){
+        if (!loading && userInfo) {
             navigate("/")
-        } 
+        }
     }
 
-    React.useEffect(() => {      
-        if (!loading && userInfo){
+    React.useEffect(() => {
+        if (!loading && userInfo) {
             navigate("/")
-        } 
+        }
     }, [userInfo])
 
 
@@ -35,14 +35,19 @@ export default function Login() {
     return (
         <div className='md:pl-[300px] bg-gray-100 dark:bg-gray-900 flex justify-center w-full'>
             <section className=" ">
-                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                     <a
                         href="#"
                         className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
                     >
                         <img
-                            className="w-8 h-8 mr-2"
-                            src="https://bahamin.online/img/lo1.png"
+                            className="w-16 dark-hidden mr-2"
+                            src="/logo2.png"
+                            alt="logo"
+                        />
+                        <img
+                            className="w-16 light-hidden mr-2"
+                            src="/logo2d.png"
                             alt="logo"
                         />
                         BGram
@@ -132,6 +137,10 @@ export default function Login() {
                     </div>
                 </div>
             </section>
+            <div className='dark:text-gray-200 text-gray-600 absolute bottom-16'>
+                email : masoud@gmail.com or david@gmail.com<br />
+                pass : 123
+            </div>
         </div>
     )
 }

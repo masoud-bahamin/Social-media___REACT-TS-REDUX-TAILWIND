@@ -7,7 +7,7 @@ export default function Sidebar() {
 
     const [isShowAside , setIsShowAside] = useState(false)
 
-    const { userInfo, loading } = useSelector((state: StateType) => state.Users)
+    const { userInfo} = useSelector((state: StateType) => state.Users)
 
     return (
         <>

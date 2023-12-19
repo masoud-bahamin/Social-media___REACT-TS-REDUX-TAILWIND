@@ -28,11 +28,15 @@ export default function Home() {
   console.log(userInfo, loading);
 
   useEffect(() => {
-    dispatch(getPosts())
+     dispatch(getPosts())
+  } , [])
+
+  useEffect(() => {
+   
     if (!userLoading && userInfo === null) {
       navigate("/login")
     }
-  }, [userInfo])
+  }, [userInfo , userLoading])
 
   const createPost = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -95,9 +99,9 @@ export default function Home() {
                   <div>
                   </div>
                 </div>
-                <div className='text-center'>
+                <div className='text-center flex md:block items-center gap-5'>
                   <div>
-                    <img className='w-32 mx-auto mb-2' src="https://cdn.dribbble.com/users/17001/screenshots/5899975/dribbble_11_1x.png" alt="" />
+                    <img className='w-40 mx-auto mb-4' src="/fi.png" alt="" />
                   </div>
                   <div>
                     <label
