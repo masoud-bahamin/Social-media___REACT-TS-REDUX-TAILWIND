@@ -1,6 +1,8 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + Redux + Rest full Api + Tailwind
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A social networking website where a user can log in and view, like and comment on posts. Create a post and have a profile page. Using real api (rest API) with dark mode
+
+https://social.bahamin.online
 
 Currently, two official plugins are available:
 
