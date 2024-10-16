@@ -1,46 +1,41 @@
-import React, { useEffect } from 'react'
-import { addPost, getPosts } from '../redux/store/posts'
-import { useDispatch, useSelector } from 'react-redux'
-import { DispatchType, StateType } from '../redux/store'
-import PostCard from '../components/Card/PostCard'
-import PostModal from '../components/Modal/PostModal'
-import { updateUserInfo } from '../redux/store/users'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { addPost, getPosts } from "../redux/store/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { DispatchType, StateType } from "../redux/store";
+import PostCard from "../components/Card/PostCard";
+import PostModal from "../components/Modal/PostModal";
+import { updateUserInfo } from "../redux/store/users";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [isShowNewPostModal, setIsShowNewPostModal] = React.useState(false);
 
-  const [title, setTitle] = React.useState("")
-  const [description, setDescription] = React.useState("")
-  const [isShowNewPostModal, setIsShowNewPostModal] = React.useState(false)
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  const dispatch: DispatchType = useDispatch();
 
-  const dispatch: DispatchType = useDispatch()
+  const poststate = useSelector((state: StateType) => state.Posts);
+  const userstate = useSelector((state: StateType) => state.Users);
 
+  const { data, loading, status, error } = poststate;
 
-  const poststate = useSelector((state: StateType) => state.Posts)
-  const userstate = useSelector((state: StateType) => state.Users)
-
-
-  const { data, loading, status, error } = poststate
-
-  const { userInfo, loading: userLoading } = userstate
-  console.log(userInfo, loading);
+  const { userInfo, loading: userLoading } = userstate;
 
   useEffect(() => {
-     dispatch(getPosts())
-  } , [])
+    dispatch(getPosts());
+  }, []);
 
   useEffect(() => {
-   
     if (!userLoading && userInfo === null) {
-      navigate("/login")
+      navigate("/login");
     }
-  }, [userInfo , userLoading])
+  }, [userInfo, userLoading]);
 
   const createPost = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const postId = crypto.randomUUID()
+    event.preventDefault();
+    const postId = crypto.randomUUID();
     const newPost: PostType = {
       username: userInfo!.username as string,
       userId: userInfo!.id as string,
@@ -50,37 +45,43 @@ export default function Home() {
       likes: [],
       description,
       postId,
-      avatar: userInfo!.avatar as string
-    }
+      avatar: userInfo!.avatar as string,
+    };
 
-    dispatch(addPost(newPost))
+    dispatch(addPost(newPost));
     if (userInfo) {
-      dispatch(updateUserInfo({
-        ...userInfo as UserType,
-        posts: [...userInfo!.posts, newPost]
-      }))
+      dispatch(
+        updateUserInfo({
+          ...(userInfo as UserType),
+          posts: [...userInfo!.posts, newPost],
+        })
+      );
     }
-    setIsShowNewPostModal(false)
-  }
-
-
-
+    setIsShowNewPostModal(false);
+  };
 
   return (
-    <div className=' overflow-hidden pt-24 pl-1 sm:pl-[270px] '>
-      <PostModal title='New Post' isShow={isShowNewPostModal} setIsShow={setIsShowNewPostModal}>
+    <div className=" overflow-hidden pt-24 pl-1 sm:pl-[270px] ">
+      <PostModal
+        title="New Post"
+        isShow={isShowNewPostModal}
+        setIsShow={setIsShowNewPostModal}
+      >
         <>
           <div className="p-6 ">
             <form onSubmit={createPost}>
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
                   <p className="mb-4 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-                    With less than a month to go before the European Union enacts new
-                    consumer privacy laws for its citizens, companies around the world
-                    are updating their terms of service agreements to comply.
+                    With less than a month to go before the European Union
+                    enacts new consumer privacy laws for its citizens, companies
+                    around the world are updating their terms of service
+                    agreements to comply.
                   </p>
                   <div>
-                    <input value={title} onChange={e => setTitle(e.target.value)}
+                    <input
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
                       type="text"
                       id="first_name"
                       className="border mb-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -89,19 +90,20 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <textarea value={description} onChange={e => setDescription(e.target.value)}
+                    <textarea
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                       id="last_name"
                       className="border h-24 mb-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Image Adrress"
                       required
                     />
                   </div>
-                  <div>
-                  </div>
+                  <div></div>
                 </div>
-                <div className='text-center flex md:block items-center gap-5'>
+                <div className="text-center flex md:block items-center gap-5">
                   <div>
-                    <img className='w-40 mx-auto mb-4' src="/fi.png" alt="" />
+                    <img className="w-40 mx-auto mb-4" src="/fi.png" alt="" />
                   </div>
                   <div>
                     <label
@@ -111,11 +113,7 @@ export default function Home() {
                     >
                       Choose File
                     </label>
-                    <input
-                      type="file"
-                      id="File"
-                      className='hidden'
-                    />
+                    <input type="file" id="File" className="hidden" />
                   </div>
                 </div>
               </div>
@@ -129,7 +127,8 @@ export default function Home() {
                 >
                   Send
                 </button>
-                <button onClick={() => setIsShowNewPostModal(false)}
+                <button
+                  onClick={() => setIsShowNewPostModal(false)}
                   data-modal-hide="default-modal"
                   type="button"
                   className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
@@ -141,27 +140,24 @@ export default function Home() {
           </div>
         </>
       </PostModal>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:gap-0 md:gap-1 xl:gap-8 pr-2 xl:pr-10'>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:gap-0 md:gap-1 xl:gap-8 pr-2 xl:pr-10">
         {status === "rejected" && (
           <div className="p-4 mb-4 text-sm font-medium min-w-[300px] text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
-            error :  {error}
+            error : {error}
           </div>
         )}
         {loading ? (
-          <div className='w-screen h-screen flex justify-center items-center'>
+          <div className="w-screen h-screen flex justify-center items-center">
             <div className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 border-4 border-dashed rounded-full"></div>
           </div>
         ) : (
           <>
-            {[...data]?.reverse().map(post => (
+            {[...data]?.reverse().map((post) => (
               <PostCard key={post.id} {...post} />
             ))}
           </>
         )}
-
-
-
       </div>
     </div>
-  )
+  );
 }
